@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { TimelineEvent } from '../types/timeline';
 import { EventType } from '../types/timeline';
 import { format } from 'date-fns';
@@ -12,6 +13,7 @@ interface TimelineProps {
 }
 
 const TimelineSimple: React.FC<TimelineProps> = ({ events, searchQuery, onEventClick }) => {
+  const { t } = useTranslation();
   const [expandedEvents, setExpandedEvents] = useState<Set<string>>(new Set());
   const timelineRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +60,7 @@ const TimelineSimple: React.FC<TimelineProps> = ({ events, searchQuery, onEventC
             } else if (item.type === 'tool_use') {
               return (
                 <div key={index} className="font-medium text-purple-600 dark:text-purple-400">
-                  Tool: {item.name}
+                  {t('app.tool')}: {item.name}
                 </div>
               );
             } else if (item.type === 'tool_result') {
@@ -257,7 +259,11 @@ const TimelineSimple: React.FC<TimelineProps> = ({ events, searchQuery, onEventC
         <div className="flex items-start gap-2 mb-2">
           <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
             {getEventIcon(event)}
-            <span>{event.type === EventType.ToolResult ? 'tool_result' : (event.role || event.type)}</span>
+            <span>
+              {event.type === EventType.ToolResult
+                ? 'tool_result'
+                : (event.role ? t(`app.roles.${event.role}`) : event.type)}
+            </span>
           </div>
           <div className="ml-auto text-xs text-gray-400 dark:text-gray-500">
             {event.timestamp instanceof Date && !isNaN(event.timestamp.getTime())
@@ -285,7 +291,7 @@ const TimelineSimple: React.FC<TimelineProps> = ({ events, searchQuery, onEventC
         {/* Metadata */}
         {event.metadata?.model && (
           <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-            Model: {event.metadata.model}
+            {t('app.model')}: {event.metadata.model}
           </div>
         )}
       </div>

@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "JSONL 時間軸視覺化工具",
+    "searchPlaceholder": "搜尋事件...",
+    "uploadButton": "上傳 JSONL",
+    "export": "匯出",
+    "exportMarkdown": "匯出為 Markdown",
+    "exportJSONL": "匯出為 JSONL",
+    "exportHTML": "匯出為 HTML",
+    "stats": {
+      "total": "總事件數",
+      "user": "用戶訊息",
+      "assistant": "助手訊息",
+      "tools": "工具調用"
+    },
+    "upload": {
+      "title": "上傳 JSONL 檔案開始使用",
+      "subtitle": "拖放檔案或點擊上方上傳按鈕"
+    },
+    "roles": {
+      "user": "用戶",
+      "assistant": "助手",
+      "summary": "摘要"
+    },
+    "tool": "工具",
+    "model": "模型"
+  }
+}

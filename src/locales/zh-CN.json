@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "JSONL 时间轴可视化工具",
+    "searchPlaceholder": "搜索事件...",
+    "uploadButton": "上传 JSONL",
+    "export": "导出",
+    "exportMarkdown": "导出为 Markdown",
+    "exportJSONL": "导出为 JSONL",
+    "exportHTML": "导出为 HTML",
+    "stats": {
+      "total": "总事件数",
+      "user": "用户消息",
+      "assistant": "助手消息",
+      "tools": "工具调用"
+    },
+    "upload": {
+      "title": "上传 JSONL 文件开始使用",
+      "subtitle": "拖放文件或点击上方上传按钮"
+    },
+    "roles": {
+      "user": "用户",
+      "assistant": "助手",
+      "summary": "摘要"
+    },
+    "tool": "工具",
+    "model": "模型"
+  }
+}

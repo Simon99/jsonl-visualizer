@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "JSONL Timeline Visualizer",
+    "searchPlaceholder": "Search events...",
+    "uploadButton": "Upload JSONL",
+    "export": "Export",
+    "exportMarkdown": "Export as Markdown",
+    "exportJSONL": "Export as JSONL",
+    "exportHTML": "Export as HTML",
+    "stats": {
+      "total": "Total Events",
+      "user": "User Messages",
+      "assistant": "Assistant Messages",
+      "tools": "Tool Calls"
+    },
+    "upload": {
+      "title": "Upload a JSONL file to get started",
+      "subtitle": "Drag and drop or click the upload button above"
+    },
+    "roles": {
+      "user": "user",
+      "assistant": "assistant",
+      "summary": "summary"
+    },
+    "tool": "Tool",
+    "model": "Model"
+  }
+}

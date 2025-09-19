@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Upload, Download, Search, Moon, Sun, FileText, X } from 'lucide-react';
+import { Upload, Download, Search, Moon, Sun, FileText, X, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import Timeline from './components/TimelineSimple';
 import { JSONLParser } from './utils/parser';
 import type { TimelineEvent, ExportOptions } from './types/timeline';
 import { exportData } from './utils/exporter';
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<TimelineEvent[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -104,6 +106,17 @@ function App() {
     exportData(filteredEvents, options);
   }, [filteredEvents]);
 
+  const toggleLanguage = () => {
+    const currentLang = i18n.language;
+    let nextLang = 'en';
+    if (currentLang === 'en') {
+      nextLang = 'zh-TW';
+    } else if (currentLang === 'zh-TW') {
+      nextLang = 'zh-CN';
+    }
+    i18n.changeLanguage(nextLang);
+  };
+
   const clearData = () => {
     setEvents([]);
     setFilteredEvents([]);
@@ -125,7 +138,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                JSONL Timeline Visualizer
+                {t('app.title')}
               </h1>
               {fileName && (
                 <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -147,7 +160,7 @@ function App() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search events..."
+                  placeholder={t('app.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
                   className="pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,7 +177,7 @@ function App() {
                 />
                 <div className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
                   <Upload className="w-4 h-4" />
-                  <span>Upload JSONL</span>
+                  <span>{t('app.uploadButton')}</span>
                 </div>
               </label>
 
@@ -173,30 +186,39 @@ function App() {
                 <div className="relative group">
                   <button className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
                     <Download className="w-4 h-4" />
-                    <span>Export</span>
+                    <span>{t('app.export')}</span>
                   </button>
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                     <button
                       onClick={() => handleExport('markdown')}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg"
                     >
-                      Export as Markdown
+                      {t('app.exportMarkdown')}
                     </button>
                     <button
                       onClick={() => handleExport('jsonl')}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                     >
-                      Export as JSONL
+                      {t('app.exportJSONL')}
                     </button>
                     <button
                       onClick={() => handleExport('html')}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
                     >
-                      Export as HTML
+                      {t('app.exportHTML')}
                     </button>
                   </div>
                 </div>
               )}
+
+              {/* Language Toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                title={i18n.language}
+              >
+                <Globe className="w-5 h-5" />
+              </button>
 
               {/* Dark Mode Toggle */}
               <button
@@ -211,10 +233,10 @@ function App() {
           {/* Stats */}
           {events.length > 0 && (
             <div className="flex gap-6 mt-4 text-sm text-gray-600 dark:text-gray-400">
-              <div>Total Events: <span className="font-semibold">{stats.totalEvents}</span></div>
-              <div>User Messages: <span className="font-semibold">{stats.userMessages}</span></div>
-              <div>Assistant Messages: <span className="font-semibold">{stats.assistantMessages}</span></div>
-              <div>Tool Calls: <span className="font-semibold">{stats.toolCalls}</span></div>
+              <div>{t('app.stats.total')}: <span className="font-semibold">{stats.totalEvents}</span></div>
+              <div>{t('app.stats.user')}: <span className="font-semibold">{stats.userMessages}</span></div>
+              <div>{t('app.stats.assistant')}: <span className="font-semibold">{stats.assistantMessages}</span></div>
+              <div>{t('app.stats.tools')}: <span className="font-semibold">{stats.toolCalls}</span></div>
             </div>
           )}
         </div>
@@ -231,8 +253,8 @@ function App() {
         ) : (
           <div className="flex flex-col items-center justify-center py-32 text-gray-500 dark:text-gray-400">
             <Upload className="w-16 h-16 mb-4" />
-            <p className="text-lg">Upload a JSONL file to get started</p>
-            <p className="text-sm mt-2">Drag and drop or click the upload button above</p>
+            <p className="text-lg">{t('app.upload.title')}</p>
+            <p className="text-sm mt-2">{t('app.upload.subtitle')}</p>
           </div>
         )}
       </main>
