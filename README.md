@@ -1,11 +1,14 @@
 # JSONL Timeline Visualizer
 
+**English** | [繁體中文](./README.zh-TW.md) | [简体中文](./README.zh-CN.md)
+
 A React-based web application for visualizing and analyzing JSONL conversation logs from Claude interactions. This tool provides an intuitive timeline interface to explore conversations between users and AI assistants, including tool usage and responses.
 
 ## Features
 
 - 📊 **Interactive Timeline View**: Visual representation of conversations with left/right separation for local vs. server operations
 - 🔍 **Search Functionality**: Full-text search across all events
+- 🌏 **Multi-language Support**: Auto-detects browser language (English, Traditional Chinese, Simplified Chinese)
 - 🎨 **Dark Mode Support**: Toggle between light and dark themes
 - 📁 **Multiple Export Formats**: Export to Markdown, HTML, or JSONL
 - 🔧 **Tool Recognition**: Automatically identifies and categorizes local vs. server-side tools
@@ -23,7 +26,7 @@ A React-based web application for visualizing and analyzing JSONL conversation l
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/julung/jsonl-visualizer.git
 cd jsonl-visualizer
 ```
 
@@ -42,6 +45,11 @@ npm run dev
 http://localhost:5173
 ```
 
+## Live Demo
+
+You can also use the deployed version on GitHub Pages:
+[https://julung.github.io/jsonl-visualizer/](https://julung.github.io/jsonl-visualizer/)
+
 ## Production Build
 
 To create a production build:
@@ -57,6 +65,11 @@ To preview the production build:
 npm run preview
 ```
 
+To deploy to GitHub Pages:
+```bash
+npm run deploy
+```
+
 ## Technology Stack
 
 - **React 18** - UI framework
@@ -65,6 +78,7 @@ npm run preview
 - **Tailwind CSS 3** - Styling
 - **Lucide React** - Icons
 - **date-fns** - Date formatting
+- **i18next** - Internationalization support
 
 ## Project Structure
 
@@ -82,6 +96,11 @@ jsonl-visualizer/
 │   │   └── toolConfig.ts      # Tool location configuration
 │   ├── types/
 │   │   └── timeline.ts        # TypeScript definitions
+│   ├── locales/              # Translation files
+│   │   ├── en.json           # English
+│   │   ├── zh-TW.json        # Traditional Chinese
+│   │   └── zh-CN.json        # Simplified Chinese
+│   ├── i18n.ts               # Internationalization configuration
 │   └── App.tsx                # Main application component
 ├── public/                    # Static assets
 └── package.json              # Project dependencies
