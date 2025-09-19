@@ -44,7 +44,7 @@ export class JSONLParser {
     });
 
     // Third pass: build hierarchy - only group directly related events
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       const event = eventMap.get(entry.uuid)!;
 
       if (processedUuids.has(event.uuid)) return;

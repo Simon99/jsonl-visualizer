@@ -180,7 +180,7 @@ const TimelineSimple: React.FC<TimelineProps> = ({ events, searchQuery, onEventC
                 const lines = item.content.split('\n');
                 return (
                   <div key={index} className="space-y-1 text-sm">
-                    {lines.map((line, lineIndex) => {
+                    {lines.map((line: string, lineIndex: number) => {
                       const urlMatch = line.match(/^\s*-\s*\/url:\s*(.+)/);
                       if (urlMatch) {
                         const url = urlMatch[1].trim();
